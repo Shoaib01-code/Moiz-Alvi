@@ -1,0 +1,183 @@
+/* Category pages (weddings, fashion, food, corporate, studio). Builds on site.css.
+   Every page shares one layout; the theme class on <body> (t-weddings, t-fashion, ...) gives each
+   category the look of its field: palette, display face and the shape of the photo frames. */
+
+/* ---------- themes ---------- */
+/* weddings keeps the site palette: ivory, maroon and gold, Mughal arches */
+.t-weddings{--ph:"M·A";--ph-size:clamp(48px,6vw,96px)}
+
+/* fashion: black and white editorial, Didone headlines, sharp frames */
+.t-fashion{
+  --paper:#f4f2ee;--paper-2:#e9e6e0;--ink:#0e0e0e;--ink-2:#1a1a1a;--muted:#67635d;--line:rgba(14,14,14,.14);
+  --accent:#0e0e0e;--gold:#0e0e0e;--gold-l:#f4f2ee;--gold-l-a:rgba(244,242,238,.2);--cta-hover:#fff;
+  --wine:#0b0b0b;--wine-2:#232323;--glow:#fbfaf8;--lb:rgba(8,8,8,.97);
+  --serif:"Bodoni Moda","Bodoni 72",Didot,serif;--hw:400;
+  --ph:"Moiz Alvi";--ph-size:clamp(30px,3.4vw,52px)}
+
+/* food (Photolicious): warm cream, terracotta and olive, plates for frames */
+.t-food{
+  --paper:#f7efe3;--paper-2:#efe1cb;--ink:#2b1d14;--ink-2:#3a281c;--muted:#7a6352;--line:rgba(43,29,20,.14);
+  --accent:#b4502a;--gold:#6c7a3b;--gold-l:#f2c38b;--gold-l-a:rgba(242,195,139,.22);--cta-hover:#f7d3a6;
+  --wine:#2b1d14;--wine-2:#4a3020;--glow:#fdf7ec;--lb:rgba(30,20,14,.97);
+  --serif:"Fraunces",Georgia,serif;--hw:300;
+  --ph:"Photolicious";--ph-size:clamp(26px,2.8vw,42px)}
+
+/* corporate: crisp light grey and navy, modern sans, squared frames */
+.t-corporate{
+  --paper:#f5f6f8;--paper-2:#e9ecf1;--ink:#0f1b2d;--ink-2:#1b2a40;--muted:#5a6678;--line:rgba(15,27,45,.12);
+  --accent:#1f4f8f;--gold:#1f4f8f;--gold-l:#a9c4ea;--gold-l-a:rgba(169,196,234,.2);--cta-hover:#c4d7f2;
+  --wine:#0f1b2d;--wine-2:#1d3150;--glow:#fff;--lb:rgba(10,18,30,.97);
+  --serif:"Manrope",system-ui,sans-serif;--sans:"Manrope",system-ui,sans-serif;--hw:600;
+  --ph:"M.A Production";--ph-size:clamp(20px,2.2vw,32px)}
+
+/* Artloft Studios: concrete and charcoal, tungsten amber, grotesk and mono, viewfinder frames */
+.t-studio{
+  --paper:#ecebe7;--paper-2:#e0ded9;--ink:#141414;--ink-2:#222;--muted:#66625c;--line:rgba(20,20,20,.14);
+  --accent:#c8742a;--gold:#141414;--gold-l:#f0a654;--gold-l-a:rgba(240,166,84,.22);--cta-hover:#f6bd7b;
+  --wine:#141414;--wine-2:#2c2a27;--glow:#f6f5f2;--lb:rgba(12,12,12,.97);
+  --serif:"Space Grotesk",system-ui,sans-serif;--sans:"Space Grotesk",system-ui,sans-serif;--hw:500;
+  --ph:"ARTLOFT";--ph-size:clamp(24px,2.6vw,38px)}
+
+body.t-corporate::after{display:none}  /* no paper grain on the corporate page */
+.t-corporate em,.t-studio em{font-style:normal}  /* these faces have no italic; emphasis is colour */
+.t-studio .label,.t-studio .c-index{font-family:"Space Mono",ui-monospace,monospace;letter-spacing:.12em}
+
+.nav-links a[aria-current="page"]::after{transform:scaleX(1)}
+.menu a:nth-child(5) span{transition-delay:.24s}.menu a:nth-child(6) span{transition-delay:.3s}.menu a:nth-child(7) span{transition-delay:.36s}
+.menu a{font-size:clamp(40px,10vw,64px)}
+
+/* ---------- page hero ---------- */
+.c-hero{position:relative;min-height:100vh;min-height:100svh;display:grid;grid-template-columns:repeat(12,1fr);gap:0 2vw;align-items:center;padding:18vh var(--gutter) 12vh;background:radial-gradient(40% 60% at 74% 50%,var(--glow),transparent)}
+.c-hero-text{grid-column:1/7}
+.crumb{display:flex;gap:12px;align-items:center;color:var(--muted)}
+.crumb a{transition:color .4s}
+.crumb a:hover{color:var(--accent)}
+.c-hero h1{font-family:var(--serif);font-weight:var(--hw);font-size:clamp(64px,9.5vw,160px);line-height:.9;letter-spacing:-.02em;margin:5vh 0 4vh}
+.c-hero h1 em{color:var(--accent)}
+.c-hero .orn{margin-bottom:4vh}
+.c-lede{font-family:var(--serif);font-weight:var(--hw);font-size:clamp(22px,1.9vw,30px);line-height:1.3;max-width:520px}
+.c-hero .text-link{margin-top:6vh}
+.c-index{position:absolute;right:var(--gutter);bottom:28px;color:var(--muted)}
+
+.t-food .c-hero h1{font-size:clamp(60px,8.4vw,150px)}  /* "photolicious" is long: keep it clear of the plate */
+.t-fashion .c-hero h1{text-transform:uppercase;line-height:.86}
+.t-fashion .c-hero h1 em{text-transform:none}
+.t-fashion .c-lede{font-family:var(--sans);font-weight:400;font-size:clamp(17px,1.3vw,20px);line-height:1.55;max-width:440px}
+.t-corporate .c-hero h1,.t-corporate .c-head h2,.t-corporate .c-insta h2,.t-corporate .c-next b,.t-corporate .contact h2{letter-spacing:-.04em}
+.t-corporate .c-lede{font-weight:400;font-size:clamp(18px,1.4vw,22px);line-height:1.5;color:var(--muted)}
+.t-studio .c-hero h1{text-transform:uppercase;letter-spacing:-.045em;line-height:.88}
+.t-studio .c-hero h1 em{color:transparent;-webkit-text-stroke:1.5px var(--ink)}
+.t-studio .c-head h2,.t-studio .c-insta h2,.t-studio .c-next b,.t-studio .contact h2{letter-spacing:-.035em}
+.t-studio .c-lede{font-weight:400;font-size:clamp(18px,1.4vw,22px);line-height:1.5}
+.t-corporate .orn{width:40px}
+.t-studio .orn{width:18px;height:18px}
+
+/* ---------- cover photo: the frame takes the shape of the field ---------- */
+.c-cover{grid-column:8/12;position:relative}
+.c-cover .ir{aspect-ratio:4/5}
+.t-fashion .c-cover .ir{aspect-ratio:3/4}
+.t-food .c-cover{grid-column:7/12}
+.t-food .c-cover .ir{aspect-ratio:1;border-radius:50%;isolation:isolate}
+.t-corporate .c-cover .ir{border-radius:6px;isolation:isolate}
+/* viewfinder: corner brackets around the frame and a focus cross in the middle */
+.t-studio .c-cover::before{content:"";position:absolute;inset:-16px;pointer-events:none;--c:var(--ink);background:
+  linear-gradient(var(--c),var(--c)) left top/28px 1.5px no-repeat,linear-gradient(var(--c),var(--c)) left top/1.5px 28px no-repeat,
+  linear-gradient(var(--c),var(--c)) right top/28px 1.5px no-repeat,linear-gradient(var(--c),var(--c)) right top/1.5px 28px no-repeat,
+  linear-gradient(var(--c),var(--c)) left bottom/28px 1.5px no-repeat,linear-gradient(var(--c),var(--c)) left bottom/1.5px 28px no-repeat,
+  linear-gradient(var(--c),var(--c)) right bottom/28px 1.5px no-repeat,linear-gradient(var(--c),var(--c)) right bottom/1.5px 28px no-repeat}
+.t-studio .c-cover::after{content:"";position:absolute;left:50%;top:50%;width:24px;height:24px;margin:-12px;pointer-events:none;mix-blend-mode:difference;opacity:.75;
+  background:linear-gradient(#fff,#fff) center/1px 100% no-repeat,linear-gradient(#fff,#fff) center/100% 1px no-repeat}
+
+/* missing photo: a branded panel in the frame's shape, until the real photo is added */
+.ir.empty{background:radial-gradient(80% 70% at 50% 35%,var(--wine-2),var(--wine))}
+.ir.empty > *{display:none}
+.ir.empty::after{content:var(--ph,"M·A");position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:0 12%;font-family:var(--serif);font-style:italic;font-weight:var(--hw);font-size:var(--ph-size);line-height:1;color:var(--gold-l)}
+.t-corporate .ir.empty::after,.t-studio .ir.empty::after{font-style:normal;letter-spacing:.12em;text-transform:uppercase}
+.t-studio .ir.empty::after{letter-spacing:.3em}
+
+/* ---------- section heads ---------- */
+.c-head{display:grid;grid-template-columns:repeat(12,1fr);gap:2vw;margin-bottom:9vh}
+.c-head .label{grid-column:1/4;padding-top:1.4em}
+.c-head h2{grid-column:4/12;font-family:var(--serif);font-weight:var(--hw);font-size:clamp(40px,5vw,78px);line-height:1.02}
+.c-head h2 em{color:var(--accent)}
+
+/* ---------- what we shoot ---------- */
+.c-offer{padding:16vh var(--gutter);background:var(--paper-2)}
+.offer{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:8vh 2.4vw}
+.offer li{border-top:1px solid var(--gold);padding-top:22px}
+.offer .num{font-family:var(--serif);font-style:italic;font-size:22px;color:var(--accent)}
+.offer h3{font-family:var(--serif);font-weight:400;font-size:clamp(26px,2.4vw,34px);line-height:1.1;margin:24px 0 10px}
+.offer p{color:var(--muted);font-size:15px;max-width:340px}
+.t-corporate .offer .num,.t-studio .offer .num{font-style:normal;font-size:13px;letter-spacing:.14em;font-weight:600}
+.t-studio .offer .num{font-family:"Space Mono",ui-monospace,monospace;font-weight:400;color:var(--accent)}
+.t-corporate .offer h3{font-weight:600;letter-spacing:-.02em}
+.t-studio .offer h3{font-weight:500;letter-spacing:-.02em}
+
+/* ---------- gallery ---------- */
+.c-gallery{padding:16vh var(--gutter)}
+.gal{columns:3 300px;column-gap:24px}
+.g{display:block;margin-bottom:24px;break-inside:avoid;overflow:hidden;isolation:isolate;cursor:zoom-in}
+.g img{width:100%;height:auto;transition:transform 1.2s var(--ease-out)}
+.g:hover img{transform:scale(1.04)}
+.t-weddings .g:nth-child(5n+1){border-radius:999px 999px 0 0}
+.t-fashion .gal{column-gap:12px}
+.t-fashion .g{margin-bottom:12px}
+.t-food .g{border-radius:18px}
+.t-corporate .g{border-radius:6px}
+
+/* ---------- instagram band ---------- */
+.c-insta{background:radial-gradient(80% 120% at 50% 50%,var(--wine-2),var(--wine));color:var(--paper);text-align:center;padding:16vh var(--gutter)}
+.c-insta .orn{margin:0 auto 4vh;color:var(--gold-l)}
+.c-insta .label{color:var(--gold-l)}
+.c-insta h2{font-family:var(--serif);font-weight:var(--hw);font-style:italic;font-size:clamp(40px,7vw,112px);line-height:1;margin:3vh 0 4vh;overflow-wrap:anywhere}
+.t-corporate .c-insta h2,.t-studio .c-insta h2{font-style:normal}
+.c-insta p{max-width:440px;margin:0 auto 6vh;opacity:.8}
+.c-insta .text-link{border-color:var(--gold-l);color:var(--gold-l)}
+
+/* ---------- next category ---------- */
+.c-next{display:block;padding:16vh var(--gutter);text-align:center}
+.c-next .label{color:var(--muted)}
+.c-next b{display:block;font-family:var(--serif);font-weight:var(--hw);font-size:clamp(64px,12vw,200px);line-height:.95;margin-top:3vh;transition:color .5s}
+.c-next .arrow{display:inline-block;font-size:.45em;vertical-align:middle;transition:transform .7s var(--ease)}
+.c-next:hover b{color:var(--accent)}
+.c-next:hover .arrow{transform:translateX(.3em)}
+.t-fashion .c-next b{text-transform:uppercase}
+.t-fashion .c-next:hover b{font-style:italic}
+
+/* ---------- contact: background shapes and the booking button follow the theme ---------- */
+.t-fashion .contact::before,.t-fashion .contact::after,
+.t-corporate .contact::before,.t-corporate .contact::after,
+.t-studio .contact::before,.t-studio .contact::after{display:none}
+.t-food .contact::before,.t-food .contact::after{aspect-ratio:1;border-radius:50%;border-bottom:1px solid var(--gold-l-a);-webkit-mask-image:none;mask-image:none}
+.cta-arrow{font-size:20px;line-height:1;margin-top:6px}
+.t-fashion .cta-circle,.t-corporate .cta-circle,.t-studio .cta-circle{width:auto;height:auto;padding:24px 36px;flex-direction:row;gap:18px;justify-self:start;box-shadow:none}
+.t-fashion .cta-circle br,.t-corporate .cta-circle br,.t-studio .cta-circle br{display:none}
+.t-fashion .cta-circle .cta-arrow,.t-corporate .cta-circle .cta-arrow,.t-studio .cta-circle .cta-arrow{margin-top:0}
+.t-fashion .cta-circle,.t-studio .cta-circle{border-radius:0}
+.t-corporate .cta-circle{border-radius:6px}
+.t-corporate .cta-circle .serif,.t-studio .cta-circle .serif{font-size:20px}
+.t-fashion .big-mark{font-size:15vw}
+.t-food .big-mark{font-size:13.5vw}
+.t-corporate .big-mark{font-size:10vw}
+.t-studio .big-mark{font-size:20vw;letter-spacing:-.05em}
+
+@media (min-width:900px) and (max-width:1180px){
+  .nav-links{gap:22px}
+  .nav-links a{font-size:10.5px;letter-spacing:.2em}
+}
+@media (max-width:899px){
+  .c-hero{grid-template-columns:1fr;gap:9vh;min-height:0;padding:16vh var(--gutter) 12vh}
+  .c-hero-text,.c-cover,.t-food .c-cover{grid-column:1}
+  .c-cover{width:min(76vw,420px);justify-self:center}
+  .c-index{display:none}
+  .c-head{grid-template-columns:1fr;gap:18px;margin-bottom:6vh}
+  .c-head .label,.c-head h2{grid-column:1;padding-top:0}
+  .offer{grid-template-columns:1fr 1fr;gap:44px 20px}
+  .gal{columns:2;column-gap:14px}
+  .g{margin-bottom:14px}
+  .t-food .contact::before{width:70vw}
+  .t-food .contact::after{width:calc(70vw - 36px)}
+}
+@media (max-width:520px){
+  .offer{grid-template-columns:1fr}
+}
